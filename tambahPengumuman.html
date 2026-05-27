@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tambah Pengumuman</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='tambahPengumuman.css')}}"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        Sistem<br/>Manajemen<br/>Kelas
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item">🏠 Beranda</a>
+        <a href="#" class="nav-item">💰 Kas Kelas</a>
+        <a href="#" class="nav-item">📋 Akuntansi kas</a>
+        <a href="#" class="nav-item">✅ Absensi</a>
+        <a href="#" class="nav-item">🏫 Struktur Kelas</a>
+        <a href="#" class="nav-item">👥 Daftar Murid</a>
+        <a href="#" class="nav-item">🧹 Jadwal Piket</a>
+        <a href="#" class="nav-item">📚 Jadwal Pelajaran</a>
+        <a href="#" class="nav-item active">📢 Pengumuman</a>
+        <a href="#" class="nav-item">📅 Agenda</a>
+        <a href="#" class="nav-item">⭐ Umpan Balik</a>
+        <a href="#" class="nav-item">🎨 Tema Dan Tampilan</a>
+        <a href="#" class="nav-item">ℹ️ Tentang</a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+
+      <!-- Header -->
+      <header class="header">
+        <button class="toggle-btn" onclick="toggleSidebar()">&#8249;</button>
+        <h1 class="header-title">📢 TAMBAH PENGUMUMAN</h1>
+        <div class="header-icons">
+          <button class="icon-btn">👤</button>
+          <button class="icon-btn">🔔</button>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="content">
+        <div class="card">
+          <div class="form-grid">
+
+            <!-- Left Column -->
+            <div class="col">
+              <div class="form-group">
+                <label>Judul</label>
+                <input type="text" placeholder="Judul Pengumuman" />
+              </div>
+
+              <div class="form-group">
+                <label>Kategori</label>
+                <select>
+                  <option value="">Pilih Kategori</option>
+                  <option>Akademik</option>
+                  <option>Keuangan</option>
+                  <option>Kegiatan</option>
+                  <option>Pengumuman Umum</option>
+                  <option>Penting</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Periode Berlaku</label>
+                <div class="date-row">
+                  <input type="date" value="2024-01-11" />
+                  <span>—</span>
+                  <input type="date" value="2024-11-30" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Lampiran Gambar</label>
+                <div class="upload-area" onclick="document.getElementById('img-upload').click()"
+                  ondragover="event.preventDefault()" ondrop="handleDrop(event)">
+                  <input type="file" id="img-upload" accept="image/*" onchange="previewImage(event)" />
+                  <div class="upload-icon">⬆️</div>
+                  <div class="upload-text">Unggah Gambar</div>
+                  <div class="upload-sub">atau seret &amp; lepas di sini</div>
+                </div>
+                <div class="preview-wrap" id="preview-wrap" style="display:none">
+                  <img id="preview-img" src="" alt="preview" />
+                  <button class="remove-img" onclick="removeImage()">✕</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col">
+              <div class="form-group" style="flex:1;display:flex;flex-direction:column;">
+                <label>Isi Pengumuman</label>
+                <div class="editor-wrap">
+                  <div class="toolbar">
+                    <button class="tb-btn" onclick="toggleFormat(this,'bold')" data-cmd="bold"><b>B</b></button>
+                    <button class="tb-btn" onclick="toggleFormat(this,'italic')" data-cmd="italic"><i>I</i></button>
+                    <button class="tb-btn" onclick="toggleFormat(this,'underline')" data-cmd="underline"><u>U</u></button>
+                    <div class="tb-divider"></div>
+                    <button class="tb-btn" onclick="execCmd('justifyLeft')">≡</button>
+                    <button class="tb-btn" onclick="execCmd('justifyCenter')">⊟</button>
+                    <button class="tb-btn" onclick="execCmd('justifyRight')">≣</button>
+                    <button class="tb-btn" onclick="execCmd('insertUnorderedList')">☰</button>
+                    <button class="tb-btn" onclick="execCmd('insertOrderedList')">☷</button>
+                  </div>
+                  <div class="editor" id="editor" contenteditable="true"
+                    data-placeholder="Tulis isi pengumuman di sini..."></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Save Button -->
+          <button class="save-btn" id="save-btn" onclick="handleSave()">
+            💾 Simpan &amp; Publikasikan
+          </button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('collapsed');
+    }
+
+    function previewImage(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      document.getElementById('preview-img').src = url;
+      document.getElementById('preview-wrap').style.display = 'inline-block';
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const url = URL.createObjectURL(file);
+        document.getElementById('preview-img').src = url;
+        document.getElementById('preview-wrap').style.display = 'inline-block';
+      }
+    }
+
+    function removeImage() {
+      document.getElementById('preview-img').src = '';
+      document.getElementById('preview-wrap').style.display = 'none';
+      document.getElementById('img-upload').value = '';
+    }
+
+    function toggleFormat(btn, cmd) {
+      btn.classList.toggle('active');
+      document.execCommand(cmd);
+      document.getElementById('editor').focus();
+    }
+
+    function execCmd(cmd) {
+      document.execCommand(cmd);
+      document.getElementById('editor').focus();
+    }
+
+    function handleSave() {
+      const btn = document.getElementById('save-btn');
+      btn.disabled = true;
+      btn.textContent = 'Menyimpan...';
+      btn.classList.add('loading');
+      setTimeout(() => {
+        btn.textContent = '✅ Tersimpan & Dipublikasikan!';
+        btn.classList.remove('loading');
+        btn.classList.add('success');
+        setTimeout(() => {
+          btn.textContent = '💾 Simpan & Publikasikan';
+          btn.classList.remove('success');
+          btn.disabled = false;
+        }, 2500);
+      }, 1200);
+    }
+  </script>
+</body>
+</html>

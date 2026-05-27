@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #1e1e1e;
+    font-size: 18px;
+}
+
+/* HEADER */
+.header {
+    width: 100%;
+    height: 100px; /* was 70px */
+    background: #2b2b2b;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    font-size: 22px;
+}
+
+.menu-icon {
+    position: absolute;
+    left: 30px;
+    font-size: 42px; /* was 28px */
+    cursor: pointer;
+}
+
+/* CONTAINER */
+.container {
+    display: flex;
+    margin-top: 100px; /* sesuaikan header */
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 320px; /* was 250px */
+    background: linear-gradient(to bottom, #48708d, #07131f);
+    color: white;
+    padding: 30px;
+}
+
+.sidebar h2 {
+    font-size: 32px; /* was 22px */
+    margin-bottom: 30px;
+    border-bottom: 1px solid white;
+    padding-bottom: 12px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    padding: 18px 16px; /* was 12px 10px */
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-size: 18px; /* was tidak ada */
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.sidebar ul li.active {
+    background: white;
+    color: black;
+    font-weight: bold;
+}
+
+/* CONTENT */
+.content {
+    flex: 1;
+    background: #f3f3f3;
+    padding: 40px; /* was 25px */
+}
+
+/* TOP CONTENT */
+.top-bar {
+    background: #b9c9d8;
+    padding: 20px 28px; /* was 15px 20px */
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.top-bar h1 {
+    font-size: 42px; /* was 28px */
+    color: #111;
+}
+
+.admin-box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.admin-text {
+    border: 1px solid #5b7f9b;
+    border-radius: 25px;
+    padding: 10px 20px;
+    background: white;
+    color: #666;
+    font-size: 18px; /* was 14px */
+}
+
+.admin-img {
+    width: 70px; /* was 45px */
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* CARD PENGUMUMAN */
+.card {
+    background: white;
+    border: 2px solid #5b7f9b;
+    border-radius: 10px;
+    padding: 30px; /* was 18px */
+    margin-bottom: 24px;
+}
+
+.card h3 {
+    font-size: 34px; /* was 24px */
+    margin-bottom: 10px;
+    color: #111;
+}
+
+.card p {
+    font-size: 18px; /* was 14px */
+    color: gray;
+    line-height: 1.6;
+}
+
+/* BUTTON TAMBAH */
+.add-btn {
+    width: 90px; /* was 60px */
+    height: 90px;
+    background: white;
+    border: 2px solid #5b7f9b;
+    border-radius: 18px;
+    font-size: 60px; /* was 40px */
+    font-weight: bold;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: #5b7f9b;
+    color: white;
+}

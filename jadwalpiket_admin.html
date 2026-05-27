@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Manajemen Kelas - Jadwal Piket</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='jadwalpiket_admin.css') }}">
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="sidebar" id="sidebar">
+            <h2>Sistem<br>Manajemen<br>Kelas</h2>
+
+            <ul>
+                <li>
+                    <i class="fa-solid fa-house"></i>
+                    Beranda
+                </li>
+                <li>
+                    <i class="fa-solid fa-wallet"></i>
+                    Kas Kelas
+                <li>
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    Akuntansi Kas
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    Absensi
+                </li>
+                <li>
+                    <i class="fa-solid fa-sitemap"></i>
+                    Struktur Kelas
+                </li>
+                <li>
+                    <i class="fa-solid fa-users"></i>
+                    Daftar Murid
+                </li>
+                <li class="active">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    Jadwal Piket
+                </li>
+                <li>
+                    <i class="fa-solid fa-book"></i>
+                    Jadwal Pelajaran
+                </li>
+                <li>
+                    <i class="fa-solid fa-bullhorn"></i>
+                    Pengumuman
+                </li>
+                <li>
+                    <i class="fa-solid fa-note-sticky"></i>
+                    Agenda
+                </li>
+                <li>
+                    <i class="fa-solid fa-star"></i>
+                    Umpan Balik
+                </li>
+                <li>
+                    <i class="fa-solid fa-palette"></i>
+                    Tema Dan Tampilan
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-info"></i>
+                    Tentang
+            </ul>
+        </div>
+
+    <main class="content">
+      <header class="content-header">
+        <h1>Jadwal Piket</h1>
+        <p class="subtitle">Berikut jadwal piket X RPL 1</p>
+      </header>
+
+      <section class="card-hari-ini">
+        <div class="hari-ini-left">
+          <span class="badge-hari">Hari ini</span>
+          <h2 class="nama-hari-besar">Senin</h2>
+          <p class="sub-hari-ini">Jadwal Piket Kelas Hari ini</p>
+          <div class="jumlah-anggota-besar">
+            <span class="icon">👥</span> 8 Anggota
+          </div>
+        </div>
+
+        <div class="hari-ini-right">
+          <h3>Anggota Piket Hari ini</h3>
+          <div class="daftar-anggota-grid">
+            <ol start="1">
+              <li>Haidar</li>
+              <li>Fatih</li>
+              <li>Dita</li>
+              <li>Fajar</li>
+            </ol>
+            <ol start="5">
+              <li>Eka</li>
+              <li>Alin</li>
+              <li>Akbar</li>
+              <li>Azzam</li>
+            </ol>
+          </div>
+          <div class="ilustrasi-piket">
+            <span style="font-size: 40px;"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="jadwal-grid">
+
+        <div class="card-hari">
+          <h3>📅 Senin</h3>
+          <ol>
+            <li>Haidar</li>
+            <li>Fatih</li>
+            <li>Dita</li>
+            <li>Fajar</li>
+            <li>Eka</li>
+            <li>Alin</li>
+            <li>Akbar</li>
+            <li>Azzam</li>
+          </ol>
+          <div class="card-footer">👥 8 Anggota</div>
+        </div>
+
+        <div class="card-hari">
+          <h3>
+           📅 selasa
+          </h3>
+          <ol>
+            <li>Nufael</li>
+            <li>Feri</li>
+            <li>Cessa</li>
+            <li>Aahmes</li>
+            <li>Azzara</li>
+            <li>Deva</li>
+            <li>Asyam</li>
+          </ol>
+          <div class="card-footer">👥 7 Anggota</div>
+        </div>
+
+        <div class="card-hari">
+          <h3>📅 Rabu</h3>
+          <ol>
+            <li>Danies</li>
+            <li>Cinta</li>
+            <li>Bagas</li>
+            <li>Agatha</li>
+            <li>Alvira</li>
+            <li>Ferdi</li>
+          </ol>
+          <div class="card-footer">👥 6 Anggota</div>
+        </div>
+
+        <div class="card-hari">
+          <h3>📅 Kamis</h3>
+          <ol>
+            <li>Devanda</li>
+            <li>Citra</li>
+            <li>Arron</li>
+            <li>Randi</li>
+            <li>Amelia</li>
+            <li>Ferdyan</li>
+            <li>Ernestha</li>
+          </ol>
+          <div class="card-footer">👥 7 Anggota</div>
+        </div>
+
+        <div class="card-hari">
+          <h3>📅 Jum`at</h3>
+          <ol>
+            <li>Eky</li>
+            <li>Defina</li>
+            <li>Candra</li>
+            <li>Dhea</li>
+            <li>Aisyah</li>
+            <li>Aldi</li>
+            <li>Avrillia</li>
+          </ol>
+          <div class="card-footer">👥 7 Anggota</div>
+        </div>
+
+      </section>
+
+      <div id="btn-edit-jadwal" class="btn-edit" onclick="aktifkanEdit()">
+  Edit 📝
+      </div>
+
+    </main>
+
+      </div>
+      <script>
+  let sedangEdit = false;
+
+  function aktifkanEdit() {
+    // Mengambil semua list nama siswa
+    const semuaNama = document.querySelectorAll('.card-hari ol li');
+    const tombol = document.getElementById('btn-edit-jadwal');
+    
+    sedangEdit = !sedangEdit;
+
+    if (sedangEdit) {
+      // 1. Ubah teks tombol menjadi Simpan
+      tombol.innerHTML = "Simpan 💾";
+      tombol.style.backgroundColor = "#2ecc71"; 
+      tombol.style.color = "#fff";
+
+      // 2. Pasang fitur edit ke semua nama secara otomatis
+      semuaNama.forEach(nama => {
+        nama.setAttribute('contenteditable', 'true');
+        nama.classList.add('mode-edit'); 
+      });
+    } else {
+      // 1. Kembalikan tombol ke mode awal
+      tombol.innerHTML = "Edit 📝";
+      tombol.style.backgroundColor = "#ffffff";
+      tombol.style.color = "#333";
+
+      // 2. Lepas/Hapus fitur edit dari semua nama agar terkunci lagi
+      semuaNama.forEach(nama => {
+        nama.removeAttribute('contenteditable');
+        nama.classList.remove('mode-edit'); 
+      });
+
+      alert("Jadwal piket berhasil disimpan!");
+    }
+  }
+</script>
+  
+
+</body>
+</html>

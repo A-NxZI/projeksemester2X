@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Sistem Manajemen Kelas</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      height:100vh;
+      display:flex;
+      background:#f5f5f5;
+    }
+
+    /* BAGIAN KIRI */
+    .left{
+      width:50%;
+      background:#426d8a;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:40px;
+    }
+
+    /* LINGKARAN FOTO */
+    .foto-lingkaran {
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #b8cdd8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+
+    .foto-lingkaran img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .title-box{
+      background:white;
+      padding:25px 70px;
+      border-radius:30px;
+      font-size:40px;
+      font-weight:300;
+      color:#222;
+      letter-spacing:1px;
+    }
+
+    /* BAGIAN KANAN */
+    .right{
+      width:50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#fafafa;
+    }
+
+    .login-box{
+      width:550px;
+      background:#d7e3ef;
+      padding:40px;
+      border-radius:35px;
+    }
+
+    .login-header{
+      background:#c6d6e6;
+      border-radius:25px;
+      padding:20px;
+      text-align:center;
+      margin-bottom:35px;
+    }
+
+    .login-header h1{
+      font-size:55px;
+      color:#333;
+      font-weight:bold;
+    }
+
+    .login-header p{
+      font-size:20px;
+      margin-top:5px;
+      color:#222;
+    }
+
+    .form-group{
+      margin-bottom:25px;
+    }
+
+    .form-group label{
+      display:block;
+      font-size:22px;
+      margin-bottom:10px;
+      color:#222;
+    }
+
+    .form-group input{
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:8px;
+      font-size:16px;
+      outline:none;
+    }
+
+    .password-box{
+      position:relative;
+    }
+
+    .password-box span{
+      position:absolute;
+      right:15px;
+      top:12px;
+      cursor:pointer;
+      font-size:20px;
+      user-select: none;
+    }
+
+    .btn-login{
+      width:100%;
+      padding:12px;
+      border:1px solid #999;
+      background:white;
+      cursor:pointer;
+      font-size:18px;
+      border-radius:5px;
+      transition:0.3s;
+    }
+
+    .btn-login:hover{
+      background:#426d8a;
+      color:white;
+    }
+
+    .register{
+      margin-top:40px;
+      text-align:center;
+      font-size:18px;
+      color:#333;
+    }
+
+    .register a{
+      text-decoration:none;
+      color:#000;
+      font-weight:bold;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      body{
+        flex-direction:column;
+        height: auto;
+      }
+
+      .left,
+      .right{
+        width:100%;
+        height:auto;
+        padding:40px 20px;
+      }
+
+      .foto-lingkaran{
+        width:250px;
+        height:250px;
+      }
+
+      .title-box{
+        font-size:28px;
+        padding:20px 40px;
+        text-align:center;
+      }
+
+      .login-box{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- KIRI -->
+  <div class="left">
+
+    <!-- =============================================
+         CARA PASANG FOTO:
+         1. Letakkan file foto Anda di folder yang SAMA
+            dengan file HTML ini
+         2. Ganti "gambar.png" di bawah menjadi
+            nama file foto Anda
+            Contoh: src="foto-saya.jpg"
+    ============================================= -->
+    <div class="foto-lingkaran">
+      <img src="{{ url_for('static', filename='images/login.png') }}" alt="Logo">
+
+    </div>
+
+    <div class="title-box">
+      Sistem Manajemen Kelas
+    </div>
+  </div>
+
+  <!-- KANAN -->
+  <div class="right">
+    <div class="masuk">
+
+      <div class="masuk">
+        <h1>MASUK</h1>
+        <p>Anda perlu masuk untuk melanjutkan</p>
+      </div>
+
+      <form>
+        <div class="form-group">
+          <label>E-mail</label>
+          <input type="email" placeholder="Isi disini">
+        </div>
+
+        <div class="form-group">
+          <label>Kata Sandi</label>
+          <div class="password-box">
+            <input type="password" id="inputPassword" placeholder="Isi disini">
+            <span onclick="togglePassword()">👁️</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-login"><a href="/beranda_admin">Masuk</a></button>
+
+        <div class="register">
+          Belum punya akun?
+          <a href="/daftar">Daftar di sini</a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const input = document.getElementById('inputPassword');
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+  </script>
+
+</body>
+</html>

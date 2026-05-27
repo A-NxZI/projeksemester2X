@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistem Manajemen Kelas</title>
+  <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet"href="{{url_for('static', filename='beranda_admin.css')}}">
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-title">
+        <h2>Sistem<br>Manajamen<br>Kelas</h2>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="active">
+          <a href="/beranda_admin"><i class="fas fa-home"></i> Beranda</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-wallet"></i> Kas Kelas</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-book"></i> Akuntansi kas</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-check-circle"></i> Absensi</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-sitemap"></i> Struktur Kelas</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-users"></i> Daftar Murid</a>
+        </li>
+        <li>
+          <a href="/jadwalpiket_admin"><i class="fas fa-calendar-day"></i> Jadwal Piket</a>
+        </li>
+        <li>
+          <a href="/jadwalpelajaran_admin"><i class="fas fa-calendar-alt"></i> Jadwal Pelajaran</a>
+        </li>
+        <li>
+          <a href="/pengumuman_admin"><i class="fas fa-bullhorn"></i> Pengumuman</a>
+        </li>
+        <li>
+          <a href="/agenda_admin"><i class="fas fa-calendar-check"></i> Agenda</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-star"></i> Umpan Balik</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-palette"></i> Tema Dan Tampilan</a>
+        </li>
+        <li>
+          <a href="#"><i class="fas fa-info-circle"></i> Tentang</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  
+  <!-- OVERLAY (mobile) -->
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-wrapper">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <button class="hamburger" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar-title">Manajemen Kelas</div>
+      <div class="topbar-right">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Cari..."/>
+        </div>
+        <div class="admin-chip">
+          <span>Hai, Admin</span>
+          <div class="avatar"><i class="fas fa-user"></i></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD CONTENT -->
+    <main class="dashboard">
+
+      <!-- ROW 1: Siswa + Kas -->
+      <div class="row-top">
+
+        <!-- Card Jumlah Siswa -->
+        <div class="card card-siswa">
+          <h3 class="card-title">Jumlah Siswa</h3>
+          <div class="siswa-body">
+            <div class="donut-wrap">
+              <svg class="donut" viewBox="0 0 120 120">
+                <circle class="donut-bg" cx="60" cy="60" r="48"/>
+                <circle class="donut-hadir" cx="60" cy="60" r="48" stroke-dasharray="270 30"/>
+                <circle class="donut-sakit" cx="60" cy="60" r="48" stroke-dasharray="9 291" stroke-dashoffset="-270"/>
+                <circle class="donut-izin"  cx="60" cy="60" r="48" stroke-dasharray="9 291" stroke-dashoffset="-279"/>
+              </svg>
+              <div class="donut-center">34</div>
+            </div>
+            <div class="siswa-legend">
+              <div class="legend-item"><span class="dot hadir"></span><b>hadir</b> : 32</div>
+              <div class="legend-item"><span class="dot sakit"></span><b>sakit</b> : 1</div>
+              <div class="legend-item"><span class="dot izin"></span><b>izin</b>  : 1</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Kas -->
+        <div class="card card-kas">
+          <div class="kas-item">
+            <div class="kas-label">
+              <i class="fas fa-credit-card kas-icon saldo"></i>
+              <span>Saldo Saat Ini</span>
+            </div>
+            <div class="kas-bar-wrap">
+              <div class="kas-bar saldo-bar" style="width:91%"></div>
+            </div>
+            <div class="kas-amount saldo-text">Rp103.000</div>
+          </div>
+          <div class="kas-divider"></div>
+          <div class="kas-item">
+            <div class="kas-label">
+              <i class="fas fa-arrow-trend-up kas-icon masuk"></i>
+              <span>Total Pemasukan</span>
+            </div>
+            <div class="kas-bar-wrap">
+              <div class="kas-bar masuk-bar" style="width:100%"></div>
+            </div>
+            <div class="kas-amount masuk-text">Rp113.000</div>
+          </div>
+          <div class="kas-divider"></div>
+          <div class="kas-item">
+            <div class="kas-label">
+              <i class="fas fa-arrow-trend-down kas-icon keluar"></i>
+              <span>Total Pengeluaran</span>
+            </div>
+            <div class="kas-bar-wrap">
+              <div class="kas-bar keluar-bar" style="width:13%"></div>
+            </div>
+            <div class="kas-amount keluar-text">Rp15.000</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 2: Jadwal + Piket + Pengumuman -->
+      <div class="row-mid">
+
+        <!-- Jadwal Pelajaran -->
+        <div class="card card-jadwal">
+          <h3 class="card-title">Jadwal Pelajaran Hari Selasa</h3>
+          <ul class="jadwal-list">
+            <li><div class="mapel">Informatika <span class="guru">Bu Rere</span></div><span class="jam">jam ke 1 - 4</span></li>
+            <li><div class="mapel">PJOK <span class="guru">Pak Agung</span></div><span class="jam">jam ke 5 - 7</span></li>
+            <li><div class="mapel">PAI <span class="guru">Bu Zulul</span></div><span class="jam">jam ke 8 - 10</span></li>
+          </ul>
+          <a href="#" class="lihat-semua"><i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- Piket Hari Ini -->
+        <div class="card card-piket">
+          <h3 class="card-title">Piket Hari Selasa</h3>
+          <div class="piket-grid">
+            <div class="piket-item"><i class="fas fa-user-circle"></i> Nufael</div>
+            <div class="piket-item"><i class="fas fa-user-circle"></i> Feri</div>
+            <div class="piket-item"><i class="fas fa-user-circle"></i> Cessa</div>
+            <div class="piket-item"><i class="fas fa-user-circle"></i> Aahmes</div>
+            <div class="piket-item"><i class="fas fa-user-circle"></i> Azzara</div>
+            <div class="piket-item"><i class="fas fa-user-circle"></i> Deva</div>
+            <div class="piket-item"><i class="fas fa-user-circle"></i> Asyam</div>
+          </div>
+        </div>
+
+        <!-- Pengumuman -->
+        <div class="card card-pengumuman">
+          <h3 class="card-title">Pengumuman</h3>
+          <div class="pengumuman-item">
+            <div class="pengumuman-judul">Sumatif Akhir Semester Genap</div>
+            <div class="pengumuman-meta">post by admin &nbsp;·&nbsp; <span>25 Mei s.d 9 Juni 2026</span></div>
+          </div>
+          <div class="pengumuman-item">
+            <div class="pengumuman-judul">Pembagian Rapor Semester Genap</div>
+            <div class="pengumuman-meta">post by admin &nbsp;·&nbsp; <span>19 Juni 2026</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 3: Agenda -->
+      <div class="row-bot">
+        <div class="card card-agenda">
+          <h3 class="card-title">Agenda</h3>
+          <ul class="agenda-list">
+            <li><span class="agenda-tgl">25 Mei 2026</span> <span class="agenda-sep">:</span> Presentasi proyek SAS kelas 10</li>
+            <li><span class="agenda-tgl">18 Juni 2026</span> <span class="agenda-sep">:</span> Hari Ulang Tahun SMK Negeri 2 Singosari</li>
+          </ul>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

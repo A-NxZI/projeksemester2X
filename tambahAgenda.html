@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agenda Kelas - Sistem Manajemen Kelas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='agenda_admin.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='tambahAgenda.css') }}"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-icon"><i class="fas fa-th-large"></i></span>
+      <div class="sidebar-title">Sistem<br>Manajemen<br>Kelas</div>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
+        <li><a href="#"><i class="fas fa-wallet"></i> Kas Kelas</a></li>
+        <li><a href="#"><i class="fas fa-book"></i> Akuntansi Kas</a></li>
+        <li><a href="#"><i class="fas fa-check-circle"></i> Absensi</a></li>
+        <li><a href="#"><i class="fas fa-sitemap"></i> Struktur Kelas</a></li>
+        <li><a href="#"><i class="fas fa-users"></i> Daftar Murid</a></li>
+        <li><a href="#"><i class="fas fa-calendar-day"></i> Jadwal Piket</a></li>
+        <li><a href="#"><i class="fas fa-calendar-alt"></i> Jadwal Pelajaran</a></li>
+        <li><a href="#"><i class="fas fa-bullhorn"></i> Pengumuman</a></li>
+        <li class="active"><a href="/"><i class="fas fa-calendar-check"></i> Agenda</a></li>
+        <li><a href="#"><i class="fas fa-star"></i> Umpan Balik</a></li>
+        <li><a href="#"><i class="fas fa-palette"></i> Tema &amp; Tampilan</a></li>
+        <li><a href="#"><i class="fas fa-info-circle"></i> Tentang</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- FLASH MESSAGES -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-circle' }}"></i>
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <!-- Tombol panah kembali ke kalender (Halaman 1) -->
+      <a href="/" class="btn-back" title="Kembali ke Kalender">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <div class="page-title">
+        <i class="fas fa-clipboard"></i>
+        <h1>AGENDA KELAS</h1>
+      </div>
+    </div>
+
+    <!-- FORM TAMBAH / EDIT AGENDA -->
+    <div class="card" id="cardForm">
+      <h2 class="card-title" id="formJudul">Tambah agenda baru</h2>
+
+      <form id="formAgenda" action="/agenda_admin/tambah" method="POST">
+        <input type="hidden" id="editIndex" name="edit_index" value=""/>
+
+        <div class="form-group">
+          <label for="judul">Judul agenda</label>
+          <input type="text" id="judul" name="judul" class="form-control"
+                 placeholder="Masukan judul agenda..." autocomplete="off"/>
+        </div>
+
+        <div class="form-group">
+          <label for="tanggal">Tanggal</label>
+          <div class="input-date-wrapper">
+            <input type="date" id="tanggal" name="tanggal" class="form-control date-input"
+                   value="{{ pre_tanggal }}" min="{{ today }}"/>
+            <i class="fas fa-calendar-alt date-icon"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="catatan">Catatan</label>
+          <textarea id="catatan" name="catatan" class="form-control" rows="4"
+                    placeholder="Tambahkan catatan untuk agenda ini..."></textarea>
+        </div>
+
+        <div class="form-btn-group">
+          <button type="button" id="btnBatal" class="btn-batal" onclick="batalEdit()" style="display:none;">
+            <i class="fas fa-times"></i> Batal
+          </button>
+          <button type="submit" id="btnSubmit" class="btn-tambah">
+            <i class="fas fa-plus" id="iconSubmit"></i>
+            <span id="labelSubmit">Tambah Agenda</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- DAFTAR AGENDA -->
+    <div class="card">
+      <h2 class="card-title">Daftar Agenda ({{ agenda_list | length }})</h2>
+
+      {% if agenda_list %}
+        {% for agenda in agenda_list %}
+          <div class="agenda-item" id="item-{{ loop.index0 }}">
+            <div class="agenda-item-header">
+              <span class="agenda-item-title">{{ agenda.judul }}</span>
+              <div class="agenda-actions">
+                <button class="btn-edit" title="Edit agenda"
+                  data-index="{{ loop.index0 }}"
+                  data-judul="{{ agenda.judul | e }}"
+                  data-tanggal="{{ agenda.tanggal }}"
+                  data-catatan="{{ agenda.catatan | e }}">
+                  <i class="fas fa-pen"></i>
+                </button>
+                <form action="/agenda_admin/hapus/{{ loop.index0 }}" method="POST"
+                      onsubmit="return confirm('Yakin ingin menghapus agenda ini?')">
+                  <button type="submit" class="btn-delete" title="Hapus agenda">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="agenda-item-date">
+              <i class="fas fa-calendar"></i>
+              {{ agenda.tanggal_display }}
+            </div>
+            {% if agenda.catatan %}
+              <div class="agenda-catatan">{{ agenda.catatan }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="empty-state">
+          <i class="fas fa-calendar"></i>
+          <p>Belum ada agenda yang ditambahkan</p>
+          <small>Mulai tambahkan agenda kelas anda</small>
+        </div>
+      {% endif %}
+    </div>
+
+  </main>
+
+  <script src="{{ url_for('static', filename='javascript/tambahAgenda.js') }}"></script>
+</body>
+</html>
