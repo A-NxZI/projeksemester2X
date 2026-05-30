@@ -155,7 +155,7 @@ function showModal(dateLabel, items, isoDate) {
   });
 
   // Set link tombol Tambah Agenda dengan tanggal yang dipilih
-  document.getElementById("modalAddBtn").href = `/agenda?tanggal=${isoDate}`;
+  document.getElementById("modalAddBtn").href = `/agenda/tambah?tanggal=${isoDate}`;
 
   document.getElementById("modalOverlay").classList.add("open");
 
@@ -174,7 +174,7 @@ function showEmptyModal(dateLabel, isoDate) {
     `<div class="modal-empty">Tidak ada agenda untuk tanggal ini.</div>`;
 
   // Set link tombol Tambah Agenda dengan tanggal yang dipilih
-  document.getElementById("modalAddBtn").href = `/agenda?tanggal=${isoDate}`;
+  document.getElementById("modalAddBtn").href = `/agenda/tambah?tanggal=${isoDate}`;
 
   document.getElementById("modalOverlay").classList.add("open");
  //  Sembunyikan tombol jika tanggal sudah lewat
